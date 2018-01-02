@@ -1,0 +1,11 @@
+USUARIO(email, senha, nome, sobrenome, CPF(PK), tipo)
+REMEDIO (id(PK), nome)
+RECEITA(CPF(PK, FK), remedio(PK, FK), horario(PK))
+  CPF referencia USUARIO
+  remedio referencia REMEDIO
+REGISTRO(CPF(PK, FK), remedio (PK, FK), timestamp(PK))
+  CPF referencia USUARIO
+  remedio referencia REMEDIO
+
+
+OBs.: Horario do remedio é dado em minutos

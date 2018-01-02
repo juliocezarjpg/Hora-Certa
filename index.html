@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Hora Certa</title>
+  <script defer src = "js/formata_CPF.js"></script>
   <link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
       <link rel="stylesheet" href="css/style.css">
@@ -22,19 +23,19 @@
         <div id="login">
           <h1>Bem vindo de volta!</h1>
 
-          <form action="/" method="post">
+          <form action ="php/autentic.php" method="GET" name="sentMessage" id="contactForm">
             <div class="field-wrap">
             <label>
               Endereço de Email<span class="req">*</span>
             </label>
-            <input type="email"required autocomplete="off"/>
+            <input type="email"required autocomplete="off"name="username"/>
           </div>
 
           <div class="field-wrap">
             <label>
               Senha<span class="req">*</span>
             </label>
-            <input type="password"required autocomplete="off"/>
+            <input type="password"required autocomplete="off"name="password"/>
           </div>
 
 
@@ -47,7 +48,7 @@
         <div id="signup">
           <h1>Registre-se Gratuitamente</h1>
 
-          <form action="/" method="post">
+          <form name = "form2" action="/" method="post">
 
             <div class="top-row">
               <div class="field-wrap">
@@ -63,6 +64,13 @@
                 </label>
                 <input type="text"required autocomplete="off"/>
               </div>
+            </div>
+
+            <div class="field-wrap">
+              <label>
+                CPF<span class="req">*</span>
+              </label>
+              <input type="text"required autocomplete="off" name="cpf" id="cpf" maxlength="14" onkeydown="FormataCPF()";/>
             </div>
 
             <div class="field-wrap">
