@@ -1,6 +1,6 @@
-#Hora Certa
+# Hora Certa
 
-	O Hora certa é um projeto que pretende ajudar as pessoas, principalmente os idosos a cuidarem melhor da sua saúde. Nos últimos anos a população idosa vem crescendo e junto com isso, a preocupação com com melhorias nas condições para a melhor idade.
+O Hora certa é um projeto que pretende ajudar as pessoas, principalmente os idosos a cuidarem melhor da sua saúde. Nos últimos anos a população idosa vem crescendo e junto com isso, a preocupação com com melhorias nas condições para a melhor idade.
 	Para vocês terem ideia, em 2007 haviam cerca de 17,4 milhões de idosos no nosso país. E esse número cresceu em mais de 50% em apenas década e hoje temos cerca de 26 milhões de idosos. E a projeção para mais dez anos é que esse número cresça ainda mais, para 37,9 milhões. 
 	A maior preocupação do hora certa é com esse público, não apenas porque eles representam um boa parte da nossa população, mas também porque eles convivem com problemas crônicos, utilizam com freqüência os serviços de saúde e são consumidores de grande número de medicamentos.
 	De acordo com a Scielo e PubMed 80% dos idosos tomam pelo menos um remédio diário e cerca de 33% consomem cinco ou mais remédios durante o dia. 
