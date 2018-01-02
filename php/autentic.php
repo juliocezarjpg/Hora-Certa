@@ -3,8 +3,37 @@
 <?php
 
 $username = $_POST['username'] ?? '';
-$pass = $_POST['pass'] ?? '';
+$pass = $_POST['password'] ?? '';
 
-echo $username;
+$dsn = 'mysql:host=127.0.0.1;dbname=horacerta_db';
+$user = 'root';
+$senha = 'abc123';
+$pdo = new PDO($dsn, $user, $senha);
+
+$sql = 'select email, senha, tipo from Usuario';
+$result = $pdo->query($sql);
+$result = $result->fetchAll(PDO::FETCH_ASSOC);
+$result = json_encode($result);
+$array = json_decode($result);
+
+$correto = 0;
+
+foreach($array as $json){
+
+  if ($json->email == $username)
+    if ($json->senha == $pass)
+      $correto = 1;
+      $tipo = $json->tipo;
+}
+
+if ($correto == 1)
+  if ($tipo == 'm'){
+    header('Location: /Hora-Certa/doctor.php');
+  }
+  else {
+    header('Location: /Hora-Certa/patient.php');
+  }
+else
+  header('Location: /Hora-Certa');
 
 ?>

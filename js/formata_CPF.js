@@ -12,6 +12,5 @@ function FormataCPF(){
 		    cpf = cpf.replace( /(\d{3})(\d{1,2})$/ , "$1-$2"); //Coloca um hífen entre o terceiro e o quarto dígitos
 
 		    var valorValido = document.getElementById("cpf").value = cpf;
-
     }
 }
