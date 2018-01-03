@@ -101,7 +101,7 @@
                       foreach($array as $json){
                         //echo $json['nome']; // you can access your key value like this if result is array
                        // echo $json->nome; // you can access your key value like this if result is object
-                       echo "<tr> <td>{$json->nome} {$json->sobrenome}</td><td><i class='material-icons'>local_hospital</i></td><td> <i class='material-icons'>assessment</i></td></tr>";
+                       echo "<tr> <td>{$json->nome} {$json->sobrenome}</td><td><i class='material-icons' name='remed'>local_hospital</i></td><td><i class='material-icons' name='graf'>assessment</i></td><td style='visibility: hidden'>{$json->cpf}</td></tr>";
                        // echo $line;
                      }
                      echo "</table>";
@@ -159,7 +159,7 @@
 
     <!-- Custom JavaScript for this theme -->
     <script src="js/scrolling-nav.js"></script>
-
+    <script src="js/doctor.js"></script>
   </body>
 
 </html>
