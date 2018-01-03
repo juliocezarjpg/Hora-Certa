@@ -21,9 +21,10 @@ $correto = 0;
 foreach($array as $json){
 
   if ($json->email == $username)
-    if ($json->senha == $pass)
+    if ($json->senha == $pass){
       $correto = 1;
       $tipo = $json->tipo;
+    }
 }
 
 if ($correto == 1)

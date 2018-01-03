@@ -12,9 +12,37 @@
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
     <!-- Custom styles for this template -->
     <link href="css/scrolling-nav.css" rel="stylesheet">
+
+    <style>
+    #table table .material-icons {
+      transition: color .3s;
+    }
+
+    #tabela table .material-icons:hover {
+      cursor: pointer;
+      color: #999;
+    }
+
+    #tabela table {
+      border-collapse: collapse;
+      text-align: center;
+      width: 400px;
+    }
+
+    #tabela table tr td:first-child{
+      text-align: left;
+    }
+
+
+    #tabela table tr:nth-child(2n+1){
+      background-color: rgba(0, 0, 0, 0.05);
+    }
+
+    </style>
 
   </head>
 
@@ -55,7 +83,30 @@
         <div class="row">
           <div class="col-lg-8 mx-auto">
             <h2>Pacientes</h2>
-            <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut optio velit inventore, expedita quo laboriosam possimus ea consequatur vitae, doloribus consequuntur ex. Nemo assumenda laborum vel, labore ut velit dignissimos.</p>
+              <div id="tabela" >
+                <?php
+
+                      echo "<table>";
+                      $dsn = 'mysql:host=127.0.0.1;dbname=horacerta_db';
+                      $user = 'root';
+                      $senha = 'abc123';
+                      $pdo = new PDO($dsn, $user, $senha);
+
+
+                      $sql = 'select * from Usuario WHERE tipo = "p"';
+                      $result = $pdo->query($sql);
+                      $result = $result->fetchAll(PDO::FETCH_ASSOC);
+                      $result = json_encode($result);
+                      $array = json_decode($result);
+                      foreach($array as $json){
+                        //echo $json['nome']; // you can access your key value like this if result is array
+                       // echo $json->nome; // you can access your key value like this if result is object
+                       echo "<tr> <td>{$json->nome} {$json->sobrenome}</td><td><i class='material-icons'>local_hospital</i></td><td> <i class='material-icons'>assessment</i></td></tr>";
+                       // echo $line;
+                     }
+                     echo "</table>";
+                ?>
+             </div>
           </div>
         </div>
       </div>
