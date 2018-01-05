@@ -8,6 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
+
     <title>Hora Certa</title>
 
     <!-- Bootstrap core CSS -->
@@ -22,18 +23,22 @@
       transition: color .3s;
     }
 
-    #tabela table .material-icons:hover {
+    .material-icons:hover {
       cursor: pointer;
       color: #999;
     }
 
-    #tabela table {
+    table {
       border-collapse: collapse;
       text-align: center;
       width: 400px;
     }
 
-    #tabela table tr td:first-child{
+    table tr td:first-child{
+      text-align: left;
+    }
+
+    table thead tr th:first-child{
       text-align: left;
     }
 
@@ -83,7 +88,7 @@
         <div class="row">
           <div class="col-lg-8 mx-auto">
             <h2>Pacientes</h2>
-              <div id="tabela" >
+              <div id="tabela">
                 <?php
 
                       echo "<table>";
@@ -106,6 +111,21 @@
                      }
                      echo "</table>";
                 ?>
+                </div>
+                <div id="cadastro_dos_remedios" style="margin-top:20px; visibility:hidden">
+                  <div id="nome_cadastrar" style="display:inline-block; margin-left:10px"></div>
+                  <div id="cadastrar" style="display:inline-block; margin-left:10px"></div>
+                  <div style="display:inline-block; margin-left:10px">
+                    <input type="text" id="horario_cadastrar" value="00:00" style="width: 50px">
+                  </div>
+                  <div style="display:inline-block; margin-left:10px">
+                    <button id="botao_cadastrar" type="button" name="button">Cadastrar</button>
+                  </div>
+                  <div id="tabela_remedios" style="margin-top:5px"></div>
+                </div>
+                <div id = "box" name="caixa" style="margin-top:20px"></div>
+                <div id="g_chart">
+                  <div id="curve_chart"  style="width: 700px; height: 500px"></div>
              </div>
           </div>
         </div>
