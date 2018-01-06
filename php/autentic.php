@@ -10,7 +10,7 @@ $user = 'root';
 $senha = 'abc123';
 $pdo = new PDO($dsn, $user, $senha);
 
-$sql = 'select email, senha, tipo from Usuario';
+$sql = 'select email, senha, tipo, cpf, nome, sobrenome from Usuario';
 $result = $pdo->query($sql);
 $result = $result->fetchAll(PDO::FETCH_ASSOC);
 $result = json_encode($result);
@@ -24,6 +24,9 @@ foreach($array as $json){
     if ($json->senha == $pass){
       $correto = 1;
       $tipo = $json->tipo;
+      $cpf = $json->cpf;
+      $nome = $json->nome;
+      $sobrenome = $json->sobrenome;
     }
 }
 
@@ -32,7 +35,7 @@ if ($correto == 1)
     header('Location: /Hora-Certa/doctor.php');
   }
   else {
-    header('Location: /Hora-Certa/patient.php');
+    header("Location: /Hora-Certa/patient.php?cpf=$cpf&&nome=$nome $sobrenome");
   }
 else
   header('Location: /Hora-Certa');

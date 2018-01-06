@@ -57,8 +57,8 @@ INSERT INTO Remedio(id_remedio, nome) VALUES (4, 'Doflex');
 
 --Inseindo dados na tabela Receita
 INSERT INTO Receita(cpf, id_remedio, horario) VALUES ('113.440.254-61', 1, '13:45');
-INSERT INTO Receita(cpf, id_remedio, horario) VALUES ('113.440.254-67', 2, '18:20');
-INSERT INTO Receita(cpf, id_remedio, horario) VALUES ('113.440.254-61', 3, '16:20');
+INSERT INTO Receita(cpf, id_remedio, horario) VALUES ('113.440.254-67', 2, '14:10');
+INSERT INTO Receita(cpf, id_remedio, horario) VALUES ('113.440.254-61', 3, '18:20');
 
 -- Inserindo dados na tabela registros
 INSERT INTO Registro(cpf, id_remedio, horario) VALUES ('113.440.254-61', 1, ADDDATE(NOW(), INTERVAL  1555 MINUTE));

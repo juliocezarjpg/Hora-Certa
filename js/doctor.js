@@ -1,85 +1,104 @@
 class Icons{
 
-  constructor(icons){
-    this.icons = icons
+  constructor(){
+    this.icons = document.querySelectorAll('.material-icons')
+    this.cpf = ''
+    this.nome = ''
   }
 
+  constr_tabela(){
+    const self = this
 
-  render(){
+    const tabela_remedios = document.getElementById("tabela_remedios")
+    let url = `http://localhost/Hora-Certa/php/require_remedio.php?cpf=${this.cpf}`
+    fetch(url)
+      .then(res => res.json())
+      .then(info => {
+        let obj = JSON.parse(info)
+        let tabela_remedios_values = `<table><thead><tr><th>Nome</th><th>Horário</th><th>Suspender</th></tr></thead>`
+        for(var k in obj) {
+          tabela_remedios_values = tabela_remedios_values + (`<tr><td>${obj[k].nome}</td><td>${obj[k].horario}</td><td><i class="material-icons" name="remov">clear</i></td></tr>`)
+        }
+        tabela_remedios_values = tabela_remedios_values + (`</table>`)
+        tabela_remedios.innerHTML = tabela_remedios_values
+      })
+      this.icons = document.querySelectorAll('.material-icons')
+      self.render()
+  }
+
+  constr_grafico(){
     const box = document.getElementById('box')
-    const botao_cadastrar = document.getElementById("botao_cadastrar");
+    document.getElementById("box").style.visibility = "visible";
+    document.getElementById("cadastro_dos_remedios").style.visibility = "collapse";
+    let url = `http://localhost/Hora-Certa/php/require_remedio.php?cpf=${this.cpf}`
+    fetch(url)
+      .then(res => res.json())
+      .then(info => {
+        let obj = JSON.parse(info)
+        document.getElementById("g_chart").style.visibility = "collapse";
+        let select = `<select id = "sel" required>
+                      <option value="sel" >Selecione</option>`
+        for(var k in obj) {
+          select = select + (`<option value="${obj[k].id}" >${obj[k].nome}</option>`)
+        }
+        select = select + (`</select>`)
+        box.innerHTML = select
+    })
+  }
+
+  constr_cadastr_remed(){
+    const self = this
+
     const nome_paciente = document.getElementById("nome_cadastrar");
     const cadastrar = document.getElementById("cadastrar");
+
+    document.getElementById("box").style.visibility = "collapse";
+    document.getElementById("g_chart").style.visibility = "collapse";
+    document.getElementById("cadastro_dos_remedios").style.visibility = "visible";
+
+    nome_paciente.innerHTML = `<b>${this.nome}</b>`
+    let url = `http://localhost/Hora-Certa/php/require_listaremedio.php`
+    fetch(url)
+      .then(res => res.json())
+      .then(info => {
+        let obj = JSON.parse(info)
+        let select = `<select id = "sel_cadastrar" required>
+                      <option value="sel">Selecione</option>`
+        for(var k in obj) {
+          select = select + (`<option value="${obj[k].id}">${obj[k].nome}</option>`)
+        }
+        select = select + (`</select>`)
+        cadastrar.innerHTML = select
+  })
+  self.constr_tabela();
+
+  }
+
+  render(){
+    const self = this
+
+    const botao_cadastrar = document.getElementById("botao_cadastrar");
     const horario_cadastrar = document.getElementById("horario_cadastrar");
-    const tabela_remedios = document.getElementById("tabela_remedios")
 
     // Botoes
-    Array.from(document.querySelectorAll('.material-icons')).map(icon => {
+    Array.from(this.icons).map(icon => {
       icon.addEventListener('click', function(){
         let tr = this.parentNode.parentNode
-        let cpf = tr.lastElementChild.innerHTML
-        let nome = tr.firstElementChild.innerHTML
+        self.cpf = tr.lastElementChild.innerHTML
+        self.nome = tr.firstElementChild.innerHTML
         let button = this.getAttribute("name")
         if (button == 'graf'){
-          // select box
-          document.getElementById("box").style.visibility = "visible";
-          document.getElementById("cadastro_dos_remedios").style.visibility = "hidden";
-          let url = `http://localhost/Hora-Certa/php/require_remedio.php?cpf=${cpf}`
-          fetch(url)
-            .then(res => res.json())
-            .then(info => {
-              let obj = JSON.parse(info)
-              // console.log(obj)
-              document.getElementById("g_chart").style.visibility = "hidden";
-              // console.log(`json: ${info}`)
-              let select = `<select id = "sel" required>
-                            <option value="sel" >Selecione</option>`
-              for(var k in obj) {
-                select = select + (`<option value="${obj[k].id}" >${obj[k].nome}</option>`)
-              }
-              select = select + (`</select>`)
-              box.innerHTML = select
-          })
+          self.constr_grafico()
         }
         else if (button = 'remed'){
-          document.getElementById("box").style.visibility = "hidden";
-          document.getElementById("g_chart").style.visibility = "hidden";
-          document.getElementById("cadastro_dos_remedios").style.visibility = "visible";
-
-          nome_paciente.innerHTML = `<b>${nome}</b>`
-          let url = `http://localhost/Hora-Certa/php/require_listaremedio.php`
-          fetch(url)
-            .then(res => res.json())
-            .then(info => {
-              let obj = JSON.parse(info)
-              let select = `<select id = "sel_cadastrar" required>
-                            <option value="sel">Selecione</option>`
-              for(var k in obj) {
-                select = select + (`<option value="${obj[k].id}">${obj[k].nome}</option>`)
-              }
-              select = select + (`</select>`)
-              cadastrar.innerHTML = select
-        })
-        url = `http://localhost/Hora-Certa/php/require_remedio.php?cpf=${cpf}`
-        fetch(url)
-          .then(res => res.json())
-          .then(info => {
-            let obj = JSON.parse(info)
-
-            let tabela_remedios_values = `<table><thead><tr><th>Nome</th><th>Horário</th><th>Suspender</th></tr></thead>`
-            for(var k in obj) {
-              tabela_remedios_values = tabela_remedios_values + (`<tr><td>${obj[k].nome}</td><td>${obj[k].horario}</td><td><i class="material-icons" class="remov">clear</i></td></tr>`)
-            }
-            tabela_remedios_values = tabela_remedios_values + (`</table>`)
-            tabela_remedios.innerHTML = tabela_remedios_values
-          })
-      }
+          self.constr_cadastr_remed()
+        }
 
         // Mudança na Select box
         box.addEventListener('change', function(){
           let value = box.firstChild.value
           // Gráfico
-          let url = `http://localhost/Hora-Certa/php/require_horario.php?cpf=${cpf}&&id_remedio=${value}`
+          let url = `http://localhost/Hora-Certa/php/require_horario.php?cpf=${self.cpf}&&id_remedio=${value}`
           fetch(url)
             .then(res => res.json())
             .then(info => {
@@ -91,7 +110,6 @@ class Icons{
               ]
               for(var k in obj) {
                 graf.push([obj[k].dia, Number(`${obj[k].preescrito_h}.${obj[k].preescrito_m}`), Number(`${obj[k].hora}.${obj[k].minuto}`)])
-                //  console.log(k, obj[k].dia);
               }
               if (typeof someObject == 'undefined') $.loadScript('https://www.gstatic.com/charts/loader.js', function(){
                   google.charts.load('current', {'packages':['corechart']});
@@ -101,7 +119,7 @@ class Icons{
                     graf
                     );
                     var options = {
-                      title: `${nome} - Horários do ${obj[0].remedio}`,
+                      title: `${self.nome} - Horários do ${obj[0].remedio}`,
                       curveType: 'function',
                       legend: { position: 'bottom' }
                     };
@@ -113,36 +131,21 @@ class Icons{
         })
         botao_cadastrar.addEventListener('click', function(){
 
-          let url = `http://localhost/Hora-Certa/php/cadastrar_remedio.php?cpf=${cpf}&&horario=${horario_cadastrar.value}&&id_remedio=${cadastrar.firstChild.value}`
+          let url = `http://localhost/Hora-Certa/php/cadastrar_remedio.php?cpf=${self.cpf}&&horario=${horario_cadastrar.value}&&id_remedio=${cadastrar.firstChild.value}`
           fetch(url)
           .then()
 
-          // console.log(document.querySelectorAll('.material-icons'))
-          // console.log(url)
+          self.constr_tabela();
 
-          url = `http://localhost/Hora-Certa/php/require_remedio.php?cpf=${cpf}`
-          fetch(url)
-            .then(res => res.json())
-            .then(info => {
-              let obj = JSON.parse(info)
-
-              let tabela_remedios_values = `<table><thead><tr><th>Nome</th><th>Horário</th><th>Suspender</th></tr></thead>`
-              for(var k in obj) {
-                tabela_remedios_values = tabela_remedios_values + (`<tr><td>${obj[k].nome}</td><td>${obj[k].horario}</td><td><i class="material-icons" class="remov">clear</i></td></tr>`)
-              }
-              tabela_remedios_values = tabela_remedios_values + (`</table>`)
-              tabela_remedios.innerHTML = tabela_remedios_values
-            })
         })
       })
     })
   }
 }
 
-let icon = document.querySelectorAll('.material-icons')
-let icons = new Icons(icon)
+// let icon = document.querySelectorAll('.material-icons')
+let icons = new Icons()
 icons.render()
-
 
 jQuery.loadScript = function (url, callback) {
     jQuery.ajax({

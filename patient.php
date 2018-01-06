@@ -82,7 +82,7 @@
     <header class="bg-primary text-white">
       <div class="container text-center">
         <h1>Bem vindo ao Hora Certa</h1>
-        <p class="lead">Um acompanhamento diário feito com carinho para você!</p>
+        <p class="lead">Um lembrete diário feito com carinho para você!</p>
       </div>
     </header>
 
@@ -90,45 +90,19 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-8 mx-auto">
-            <h2>Pacientes</h2>
-              <div id="tabela">
-                <?php
-
-                      echo "<table>";
-                      $dsn = 'mysql:host=127.0.0.1;dbname=horacerta_db';
-                      $user = 'root';
-                      $senha = 'abc123';
-                      $pdo = new PDO($dsn, $user, $senha);
-
-
-                      $sql = 'select * from Usuario WHERE tipo = "p"';
-                      $result = $pdo->query($sql);
-                      $result = $result->fetchAll(PDO::FETCH_ASSOC);
-                      $result = json_encode($result);
-                      $array = json_decode($result);
-                      foreach($array as $json){
-                        //echo $json['nome']; // you can access your key value like this if result is array
-                       // echo $json->nome; // you can access your key value like this if result is object
-                       echo "<tr> <td>{$json->nome} {$json->sobrenome}</td><td><i class='material-icons' name='remed'>local_hospital</i></td><td><i class='material-icons' name='graf'>assessment</i></td><td style='visibility: hidden'>{$json->cpf}</td></tr>";
-                       // echo $line;
-                     }
-                     echo "</table>";
-                ?>
-                </div>
-                <div id="cadastro_dos_remedios" style="margin-top:20px; visibility:hidden">
-                  <div id="nome_cadastrar" style="display:inline-block; margin-left:10px"></div>
-                  <div id="cadastrar" style="display:inline-block; margin-left:10px"></div>
-                  <div style="display:inline-block; margin-left:10px">
-                    <input type="text" id="horario_cadastrar" value="00:00" style="width: 50px">
-                  </div>
-                  <div style="display:inline-block; margin-left:10px">
-                    <button id="botao_cadastrar" type="button" name="button">Cadastrar</button>
-                  </div>
-                  <div id="tabela_remedios" style="margin-top:5px"></div>
-                </div>
-                <div id = "box" name="caixa" style="margin-top:20px"></div>
-                <div id="g_chart">
-                  <div id="curve_chart"  style="width: 700px; height: 500px"></div>
+            <h2>Acompanhamento</h2>
+            <div id="nome">
+              <?
+                $cpf = $_GET['cpf'] ?? '';
+                $nome = $_GET['nome'] ?? '';
+                echo "<b>$nome</b>";
+                echo "<p style='visibility:hidden'>$cpf</p>";
+              ?>
+            </div>
+            <div id="tabela_remedios" style="margin-top:5px"></div>
+            <div id = "box" name="caixa" style="margin-top:20px"></div>
+            <div id="curve_chart"  style="width: 700px; height: 500px"></div>
+            <div id="g_chart">
              </div>
           </div>
         </div>
@@ -182,7 +156,7 @@
 
     <!-- Custom JavaScript for this theme -->
     <script src="js/scrolling-nav.js"></script>
-    <script src="js/doctor.js"></script>
+    <script src="js/patient.js"></script>
   </body>
 
 </html>
