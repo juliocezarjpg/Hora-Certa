@@ -22,7 +22,6 @@
 
         <div id="login">
           <h1>Bem vindo de volta!</h1>
-
           <form action ="php/autentic.php" method="post" name="sentMessage" id="contactForm">
             <div class="field-wrap">
             <label>
@@ -48,21 +47,21 @@
         <div id="signup">
           <h1>Registre-se Gratuitamente</h1>
 
-          <form name = "form2" action="/" method="post">
+          <form name = "form2" action="php/cadastrar_paciente.php" method="post">
 
             <div class="top-row">
               <div class="field-wrap">
                 <label>
                   Nome<span class="req">*</span>
                 </label>
-                <input type="text" required autocomplete="off" />
+                <input type="text" required autocomplete="off" name="nome"/>
               </div>
 
               <div class="field-wrap">
                 <label>
                   Sobrenome<span class="req">*</span>
                 </label>
-                <input type="text"required autocomplete="off"/>
+                <input type="text"required autocomplete="off" name="sobrenome"/>
               </div>
             </div>
 
@@ -77,20 +76,20 @@
               <label>
                 Endreço de email<span class="req">*</span>
               </label>
-              <input type="email"required autocomplete="off"/>
+              <input type="email"required autocomplete="off" name="email"/>
             </div>
 
             <div class="field-wrap">
               <label>
                 Crie uma senha<span class="req">*</span>
               </label>
-              <input type="password"required autocomplete="off"/>
+              <input type="password"required autocomplete="off" name="senha"/>
             </div>
 
             <div class="field-wrap">
-              <select id="tipo" required>
-                <option value="med" >Médico</option>
-                <option value="pac" >Paciente</option>
+              <select id="tipo" required name="tipo">
+                <option value="m" >Médico</option>
+                <option value="p" >Paciente</option>
               </select>
             </div>
 
@@ -103,8 +102,3 @@
     <script  src="js/index.js"></script>
 </body>
 </html>
-
-<?php
-if(isset($_SESSION['errors'])){
-    unset($_SESSION['errors']);
-} ?>
