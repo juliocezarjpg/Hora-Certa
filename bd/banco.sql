@@ -53,7 +53,7 @@ INSERT INTO Usuario(email, senha, cpf, nome, sobrenome, tipo) VALUES ('maria@gma
 INSERT INTO Remedio(id_remedio, nome) VALUES (1, 'Ibuprofeno');
 INSERT INTO Remedio(id_remedio, nome) VALUES (2, 'Tilenol');
 INSERT INTO Remedio(id_remedio, nome) VALUES (3, 'Multigrip');
-INSERT INTO Remedio(id_remedio, nome) VALUES (4, 'Doflex');
+INSERT INTO Remedio(id_remedio, nome) VALUES (4, 'Dorflex');
 
 --Inseindo dados na tabela Receita
 INSERT INTO Receita(cpf, id_remedio, horario) VALUES ('113.440.254-61', 1, '13:45');
